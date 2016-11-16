@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+        padding:0;
+        }
+        .box{
+            width: 560px;
+            height: 300px;
+            /*border:1px solid red;*/
+            margin:100px auto;
+            position:relative;
+        }
+        
+        .box ul li{
+            list-style: none;
+            /*background-color: pink;*/
+            float:left;
+            height:300px;;
+            width:112px;
+            position:relative;
+            transform:rotateX(0deg) rotateY(0deg);
+            transform-style:preserve-3d;
+            transition:all 1s;
+        }
+        li span{
+            width:100%;
+            height:100%;
+            position:absolute;
+
+        }
+        .box li span:nth-child(1){
+         transform:translateZ(150px);
+            background-image:url(images/1.jpg);
+
+        }
+        .box li span:nth-child(2){
+            transform:rotateX(90deg) translateZ(150px);
+            background-image:url(images/2.jpg);
+
+
+        }
+        .box li span:nth-child(3){
+            transform:rotateX(180deg) translateZ(150px);
+            background-image:url(images/3.jpg);
+        }
+        .box li span:nth-child(4){
+            transform:rotateX(-90deg) translateZ(150px);
+            background-image:url(images/4.jpg);
+        }
+        .box li:nth-child(1) span{
+
+        }
+        .box li:nth-child(2) span{
+            background-position:-112px 0;
+
+        }
+        .box li:nth-child(3) span{
+            background-position:-224px 0;
+
+        }
+        .box li:nth-child(4) span{
+            background-position:-336px 0;
+
+        }
+        .box li:nth-child(5) span{
+            background-position:-448px 0;
+
+        }
+        a{
+            text-decoration: none;
+            font-size:60px;
+            /*color:red;*/
+            position:absolute;
+            left:0px;
+            top:110px;
+            width:50px;
+            height:60px;
+            background-color:rgba(225,225,225,0.5);
+
+
+        }
+        .box a:nth-child(2){
+            left:auto;
+            right:0px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+    </ul>
+    <a href="#" class="you">></a>
+    <a href="#" class="zuo"><</a>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+
+    $(function(){
+        var index=0;
+        var isTransitionEnd=true;
+        $(".zuo").click(function(){
+            if(isTransitionEnd){
+                index++;
+                var r=90*index;
+                $("li").css("transform","rotateX("+r+"deg");
+                isTransitionEnd=false;
+                $("li").each(function(index,n1){
+                    $(n1).css("transition-delay",index*0.25+"s");
+                })
+
+            }
+            })
+
+
+
+        $(".you").click(function(){
+            if(isTransitionEnd){
+                index--;
+                var r=90*index;
+                $("li").css("transform","rotateX("+r+"deg");
+
+                $("li").each(function(index,n2){
+                    $(n2).css("transition-delay",index*0.25+"s");
+                })
+                isTransitionEnd=false;
+
+            }
+
+        })
+
+        $("li").eq(4).on("webkitTransitionEnd",function(){
+            isTransitionEnd=true;
+        })
+
+    })
+
+
+</script>
+
+</body>
+</html>
